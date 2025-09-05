@@ -1,0 +1,140 @@
+  body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 12px;
+      width: 420px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #00c853;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00e676;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .category {
+      font-size: 0.8em;
+      padding: 3px 7px;
+      border-radius: 6px;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+
+    .Trabalho {
+      background: #ff9800;
+      color: #fff;
+    }
+
+    .Estudos {
+      background: #3f51b5;
+      color: #fff;
+    }
+
+    .Pessoal {
+      background: #e91e63;
+      color: #fff;
+    }
+
+    .delete {
+      background: #ff1744;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .delete:hover {
+      background: #ff5252;
+    }
+
+    .filters {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .filters select {
+      flex: 1;
+    }
+    footer{
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(90deg, #2f32ee, #a909f3);
+    color: white;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+footer strong{
+    color: #fff5fb;
+}

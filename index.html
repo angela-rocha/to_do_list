@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Completa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Minha To-Do List</h1>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
+      <select id="categorySelect">
+        <option value="Trabalho">Trabalho</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Pessoal">Pessoal</option>
+      </select>
+      <button id="addTask">Adicionar</button>
+    </div>
+
+    <div class="filters">
+      <select id="filterCategory">
+        <option value="Todas">Todas as Categorias</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Pessoal">Pessoal</option>
+      </select>
+
+      <select id="filterStatus">
+        <option value="Todas">Todos os Status</option>
+        <option value="Pendentes">Pendentes</option>
+        <option value="Concluídas">Concluídas</option>
+      </select>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+
+  <footer>
+    <div class="footer">
+    <p>Desenvolvido com ❤️ por <strong>Angela Rocha</strong></p>
+    </div>
+  </footer>
+
+</body>
+</html>
