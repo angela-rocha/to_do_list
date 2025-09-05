@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Completa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 12px;
+      width: 420px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #00c853;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00e676;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 8px;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    li.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .category {
+      font-size: 0.8em;
+      padding: 3px 7px;
+      border-radius: 6px;
+      margin-left: 8px;
+      font-weight: bold;
+    }
+
+    .Trabalho {
+      background: #ff9800;
+      color: #fff;
+    }
+
+    .Estudos {
+      background: #3f51b5;
+      color: #fff;
+    }
+
+    .Pessoal {
+      background: #e91e63;
+      color: #fff;
+    }
+
+    .delete {
+      background: #ff1744;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .delete:hover {
+      background: #ff5252;
+    }
+
+    .filters {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .filters select {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Minha To-Do List</h1>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
+      <select id="categorySelect">
+        <option value="Trabalho">Trabalho</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Pessoal">Pessoal</option>
+      </select>
+      <button id="addTask">Adicionar</button>
+    </div>
+
+    <div class="filters">
+      <select id="filterCategory">
+        <option value="Todas">Todas as Categorias</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Estudos">Estudos</option>
+        <option value="Pessoal">Pessoal</option>
+      </select>
+
+      <select id="filterStatus">
+        <option value="Todas">Todos os Status</option>
+        <option value="Pendentes">Pendentes</option>
+        <option value="Concluídas">Concluídas</option>
+      </select>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const addTaskBtn = document.getElementById("addTask");
+    const taskList = document.getElementById("taskList");
+    const categorySelect = document.getElementById("categorySelect");
+    const filterCategory = document.getElementById("filterCategory");
+    const filterStatus = document.getElementById("filterStatus");
+
+    // Carregar tarefas do localStorage
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function renderTasks() {
+      taskList.innerHTML = "";
+      const categoryFilter = filterCategory.value;
+      const statusFilter = filterStatus.value;
+
+      tasks.forEach((task, index) => {
+        // Filtro por categoria
+        if (categoryFilter !== "Todas" && task.category !== categoryFilter) return;
+
+        // Filtro por status
+        if (statusFilter === "Pendentes" && task.completed) return;
+        if (statusFilter === "Concluídas" && !task.completed) return;
+
+        const li = document.createElement("li");
+
+        if (task.completed) {
+          li.classList.add("completed");
+        }
+
+        const taskInfo = document.createElement("div");
+        taskInfo.classList.add("task-info");
+        taskInfo.textContent = task.text;
+
+        const categorySpan = document.createElement("span");
+        categorySpan.textContent = task.category;
+        categorySpan.classList.add("category", task.category);
+
+        taskInfo.appendChild(categorySpan);
+        li.appendChild(taskInfo);
+
+        // Marcar como concluído ao clicar
+        li.addEventListener("click", () => {
+          tasks[index].completed = !tasks[index].completed;
+          saveTasks();
+          renderTasks();
+        });
+
+        // Botão de excluir
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "X";
+        deleteBtn.classList.add("delete");
+        deleteBtn.addEventListener("click", (e) => {
+          e.stopPropagation(); // evitar marcar como concluído
+          tasks.splice(index, 1);
+          saveTasks();
+          renderTasks();
+        });
+
+        li.appendChild(deleteBtn);
+        taskList.appendChild(li);
+      });
+    }
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    addTaskBtn.addEventListener("click", () => {
+      const text = taskInput.value.trim();
+      const category = categorySelect.value;
+      if (text !== "") {
+        tasks.push({ text, category, completed: false });
+        saveTasks();
+        renderTasks();
+        taskInput.value = "";
+      }
+    });
+
+    taskInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        addTaskBtn.click();
+      }
+    });
+
+    filterCategory.addEventListener("change", renderTasks);
+    filterStatus.addEventListener("change", renderTasks);
+
+    // Renderizar ao carregar
+    renderTasks();
+  </script>
+</body>
+</html>
