@@ -26,7 +26,7 @@ Este é um projeto de **lista de tarefas (To-Do List)** desenvolvido em **HTML, 
 
 📸 Demonstração
 
-[Ver Projeto](https://angela-silva.github.io/to_do_list/)
+[Ver Projeto](https://angela-rocha.github.io/to_do_list/)
 
 👩‍💻 Autor(a)
 
