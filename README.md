@@ -24,11 +24,11 @@ Este é um projeto de **lista de tarefas (To-Do List)** desenvolvido em **HTML, 
 - **JavaScript (ES6+)**
 - **LocalStorage**
 
-📸 Demonstração
+## 📸 Demonstração
 
 [Ver Projeto](https://angela-rocha.github.io/to_do_list/)
 
-👩‍💻 Autor(a)
+## 👩‍💻 Autor(a)
 
 Projeto desenvolvido com ❤️ por Angela Rocha 🚀
 Se quiser sugerir melhorias, fique à vontade! 😃
